@@ -1,0 +1,33 @@
+[package]
+name = "art_nft_psp34"
+version = "1.0.0"
+edition = "2021"
+authors = ["Logion Team <team@logion.network>"]
+
+[dependencies]
+
+ink = { version = "4.3.0", default-features = false }
+ink_env = { version = "4.3.0", default-features = false }
+ink_prelude = { version = "4.3.0", default-features = false }
+scale = { package = "parity-scale-codec", version = "3", default-features = false, features = ["derive"] }
+scale-info = { version = "2.6", default-features = false, features = ["derive"], optional = true }
+openbrush = { tag = "4.0.0", git = "https://github.com/Brushfam/openbrush-contracts", default-features = false, features = ["psp34", "ownable"] }
+logion_contract = { tag = "v0.1.2", git = "https://github.com/logion-network/logion-ink", default-features = false }
+psp34_traits = { path = "../../logics", default-features = false }
+
+[lib]
+path = "lib.rs"
+
+[features]
+default = ["std"]
+std = [
+    "ink/std",
+    "ink_env/std",
+    "ink_prelude/std",
+    "scale/std",
+    "scale-info/std",
+    "openbrush/std",
+    "logion_contract/std",
+    "psp34_traits/std",
+]
+ink-as-dependency = []
