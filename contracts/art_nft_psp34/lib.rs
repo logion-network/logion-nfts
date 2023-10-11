@@ -30,7 +30,10 @@ pub mod art_nft_psp34 {
         pub fn new(nonce: String, collection_loc_id: u128, cert_host: String) -> Self {
             let mut instance = Self::default();
             instance.logion.init(nonce, collection_loc_id, cert_host);
-            instance
+            match instance.set_base_uri(String::from("undefined")) {
+                Ok(_) => instance,
+                _ => panic!("Failed to set default base_uri")
+            }
         }
     }
 }
