@@ -5,18 +5,21 @@ use ink::prelude::{
     },
 };
 use openbrush::{
+    contracts::ownable::*,
     contracts::psp34::extensions::{
         metadata::{Internal, PSP34Impl, PSP34MetadataImpl},
     },
+    modifiers,
+    traits::Storage,
 };
-
 use crate::traits::error::Error;
 
 #[openbrush::trait_definition]
-pub trait Psp34Traits: PSP34Impl + PSP34MetadataImpl + Internal {
+pub trait Psp34Traits: PSP34Impl + PSP34MetadataImpl + Internal + Storage<ownable::Data> {
 
     /// Change baseURI
     #[ink(message)]
+    #[modifiers(only_owner)]
     fn set_base_uri(&mut self, uri: String) -> Result<(), Error> {
         let collection_id = PSP34Impl::collection_id(self);
         self._set_attribute(collection_id, String::from("baseURI"), uri);
