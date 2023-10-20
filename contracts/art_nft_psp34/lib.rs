@@ -42,7 +42,12 @@ pub mod art_nft_psp34 {
             }
         }
 
-        /// Mint one NFT for each given account, using TokenID U64(0..n)
+        #[doc = "Mint one NFT for each given account. \n"]
+        #[doc = "If t is the total supply at call time, for given accounts[0..n],\n"]
+        #[doc = "NFT with id U64(t + 0) is minted to accounts[0],\n"]
+        #[doc = "NFT with id U64(t + 1) is minted to accounts[1],\n"]
+        #[doc = "...\n"]
+        #[doc = "NFT with id U64(t + n) is minted to accounts[n].\n"]
         #[ink(message)]
         #[modifiers(only_owner)]
         pub fn mint(&mut self, accounts: Vec<AccountId>) -> Result<Vec<(AccountId, Id)>, PSP34Error> {
